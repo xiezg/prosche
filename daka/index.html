@@ -3,45 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>三省吾身，按时打卡</title>
-    <script type="text/javascript" src="js/index.js" ></script>
-    <script type="text/javascript" >
-
-    </script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
     <style>
-        .task_item{
+        .task_item {
             margin-bottom: 10px;
         }
 
-        .task_item > * {
-            display: inline;
+        #list .task_item span{
             margin: 5px;
-            border: 5px solid red;
         }
+        #list .task_item span:nth-of-type(1){
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 
 <div>
     <p id="now_date"></p>
+    <p>2020年3月4日开始,今天的计划，一定要实现commit打卡信息提交到数据库</p>
 </div>
 <div>
     <div id="list">
-        <div class="task_item">
-            <div>序号</div>
-            <div>状态</div>
-            <div>时间</div>
-            <div>动作</div>
-            <div>打卡时间</div>
-            <div>完成结果</div>
-        </div>
-        <div class="task_item">
-            <div>序号</div>
-            <div>状态</div>
-            <div>时间</div>
-            <div>动作</div>
-            <div>打卡时间</div>
-            <div>完成结果</div>
-        </div>
     </div>
 </div>
 </body>

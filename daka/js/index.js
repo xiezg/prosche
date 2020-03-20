@@ -31,11 +31,24 @@ function postMsg(uri, send_msg, cb ){
     };
 }
 
+//p.appendChild( input )
+//p.appendChild( actionType ) //0
+//p.appendChild(actionTime)   //1
+//p.appendChild(actionName)   //2
+//p.appendChild(commitTime)   //3
+//p.appendChild(takeTime)     //4
+//p.appendChild(actionResult) //5
+//p.appendChild(warning)  //6
+
 var commit_data = function (obj) {
+    obj = obj.target;
+    var actionType = obj.nextSibling;
+    var actionTime = actionType.nextSibling;
+    var actionName = actionTime.nextSibling;
+    var commitTime = actionName.nextSibling;
+    //var actionResult = commitTime.nextSibling;
 
-    console.log( obj )
-
-    postMsg( "api/commit_action", { ActionType:parseInt(obj.target.value), CommitTime:"", Remarks:""}, function (status, resp) {
+    postMsg( "api/commit_action", { ActionType:parseInt(actionType.innerText), CommitTime:commitTime.innerText, Remarks:""}, function (status, resp) {
         if( status != 200 ){
             return
         }
@@ -58,29 +71,45 @@ var query_action = function () {
 
         var node_list = document.getElementById( "list" );
 
-        for( var i = 0; i< resp.Data.length;i++ ){
+        resp.Data.forEach(function (item) {
 
-            var input = document.createElement( "input" );
+            var actionType = document.createElement( "span");
+            var actionTime = document.createElement( "span" );
+            var actionName = document.createElement( "span" );
+            var commitTime = document.createElement( "span" );
+            var takeTime = document.createElement( "span" );
+            var actionResult = document.createElement( "span" );
+            var warning = document.createElement("span")
+
+            actionType.innerText = item.Action_type;
+            actionTime.innerText = item.Action_time;
+            actionName.innerText = item.Action;
+            takeTime.innerText = item.Take_time == null ? "" :item.Take_time;
+            commitTime.innerText = item.Commit_time == null ? "未打卡":item.Commit_time;
+            actionResult.innerText = item.Remarks == null ? "":item.Remarks;
+            warning.innerText = item.Warning == null?"":item.Warning;
+
+            var input = document.createElement( "input" )
             input.type = "checkbox";
             input.onclick=commit_data;
-            input.value = resp.Data[i].Id;
+            input.checked = item.Status != null
 
-            var p = document.createElement("div");
-            p.setAttribute( "class", "task_item" )
-            p.appendChild(input);
-            p.append( resp.Data[i].Action_time )
-            p.append( "  " )
-            p.append( resp.Data[i].Action );
-            if( resp.Data[i].Commit_time != null ) {
-                p.append("  ")
-                p.append(resp.Data[i].Commit_time)
-            }
+            //必须按照顺序添加，因为插在兄弟节点时时按照顺序的
+            var p = document.createElement( "p" )
+            p.appendChild( input )
+            p.appendChild( actionType ) //0
+            p.appendChild(actionTime)   //1
+            p.appendChild(actionName)   //2
+            p.appendChild(commitTime)   //3
+            p.appendChild(takeTime)     //4
+            p.appendChild(actionResult) //5
+            p.appendChild(warning)  //6
 
-            if( resp.Data[i].Status != null &&  resp.Data[i].Status == 1 ){
-                input.checked = true;
-            }
-            node_list.appendChild(p);
-        }
+            var div = document.createElement( "div" );
+            div.setAttribute( "class", "task_item" )
+            div.appendChild(p)
+            node_list.appendChild(div)
+        })
     } )
 }
 
