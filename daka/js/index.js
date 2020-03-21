@@ -56,6 +56,8 @@ var commit_data = function (obj) {
         if( resp.Ret == 2 ){
             window.location.replace( "login.html" )
         }
+
+        location.reload()
     } )
 }
 
@@ -81,11 +83,14 @@ var query_action = function () {
             var actionResult = document.createElement( "span" );
             var warning = document.createElement("span")
 
+            warning.setAttribute( "class", "warning" )
+            //actionName.setAttribute( "class", "actionName" )
+
             actionType.innerText = item.Action_type;
             actionTime.innerText = item.Action_time;
             actionName.innerText = item.Action;
             takeTime.innerText = item.Take_time == null ? "" :item.Take_time;
-            commitTime.innerText = item.Commit_time == null ? "未打卡":item.Commit_time;
+            commitTime.innerText = item.Commit_time == null ? "":item.Commit_time;
             actionResult.innerText = item.Remarks == null ? "":item.Remarks;
             warning.innerText = item.Warning == null?"":item.Warning;
 
