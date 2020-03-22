@@ -61,8 +61,11 @@ var commit_data = function (obj) {
     } )
 }
 
-var query_action = function () {
-    postMsg('api/query_action',null, function (status, resp) {
+var query_action = function ( timestamp_seconds ) {
+
+    setshowDate(timestamp_seconds)
+
+    postMsg('api/query_action',{time:parseInt( (timestamp_seconds).toFixed(0))}, function (status, resp) {
         if( status != 200 ){
             return
         }
@@ -118,10 +121,48 @@ var query_action = function () {
     } )
 }
 
-window.onload= function () {
+function show_days(){
+    var start_time = new Date( 2020, 0,1).getTime()/1000;
+    var end_time = new Date(2021,0,1 ).getTime()/1000;
+    var cur_days = ((new Date().getTime()/1000 - start_time)/86400).toFixed(0);
 
-    query_action();
+    var days = (end_time-start_time)/86400;
+    var days_list = document.getElementById( "days_list" )
+
+    console.log( days )
+    for( var i=0;i<days;i++ ){
+        var item = document.createElement( "div" )
+        item.setAttribute( "class", i<cur_days?"old_day":"new_day" )
+        item.setAttribute( "index", i );
+
+        if( i == cur_days ){
+            item.setAttribute( "class", "today" )
+        }
+
+        item.onclick=function( obj){
+            var index = obj.target.attributes["index"].value;
+            var node_list = document.getElementById( "list" );
+            node_list.innerText = "";
+
+            query_action( start_time + index*86400  );
+        }
+
+        days_list.appendChild( item )
+    }
+}
+
+var setshowDate= function ( timestamp_seconds ) {
 
     var d = new Date();
-    document.getElementById("now_date").innerText = d.toLocaleDateString();//d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate());
+
+    if( timestamp_seconds ){
+        d.setTime( timestamp_seconds*1000 )
+    }
+
+    document.getElementById("now_date").innerText = d.toLocaleDateString();// d.toLocaleDateString();//d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate());
+}
+window.onload= function () {
+
+    query_action( (new Date().getTime())/1000 );
+    show_days();
 }

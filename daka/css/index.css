@@ -1,0 +1,59 @@
+
+/*a.link{position:relative;}*/
+/*a.link div.tips{*/
+/*border:1px solid #333;*/
+/*padding:10px;*/
+/*background-color:#ff0;*/
+/*position:absolute;*/
+/*top:16px;*/
+/*left:0px;*/
+/*display:none;*/
+/*}*/
+/*a.link:hover{}*/
+/*a.link:hover div.tips {*/
+/*display: inline;*/
+/*}*/
+
+.task_item {
+    margin-bottom: 10px;
+}
+
+#list .task_item span {
+    margin: 5px;
+}
+
+#list .task_item .warning {
+    color: red;
+}
+
+#list .task_item span:nth-of-type(1) {
+    display: none;
+}
+
+#days_list {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#days_list .old_day, .new_day, .today {
+    width: 15px;
+    height: 15px;
+    background-color: #999999;
+    float: left;
+    margin: 3px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 1px #bfbfbf;
+}
+
+#days_list .today{
+    background-color: green;
+}
+
+#days_list .new_day {
+    background-color: red;
+}
+
+#days_list div:hover {
+    background-color: #2530ff;
+    box-shadow: 4px 4px 3px #bdbdbd;
+}
