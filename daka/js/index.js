@@ -48,7 +48,7 @@ var commit_data = function (obj) {
     var commitTime = actionName.nextSibling;
     //var actionResult = commitTime.nextSibling;
 
-    postMsg( "api/commit_action", { ActionType:parseInt(actionType.innerText), CommitTime:commitTime.innerText, Remarks:""}, function (status, resp) {
+    postMsg( "api/commit_action", { ActionType:parseInt(actionType.innerText), CommitTime:commitTime.attributes["time"].value, Remarks:""}, function (status, resp) {
         if( status != 200 ){
             return
         }
@@ -59,6 +59,10 @@ var commit_data = function (obj) {
 
         location.reload()
     } )
+}
+
+var showDayTime = function ( d ) {
+    return d.getHours() + ":" + d.getMinutes()+ ":" + d.getSeconds();
 }
 
 var query_action = function ( timestamp_seconds ) {
@@ -93,7 +97,8 @@ var query_action = function ( timestamp_seconds ) {
             actionTime.innerText = item.Action_time;
             actionName.innerText = item.Action;
             takeTime.innerText = item.Take_time == null ? "" :item.Take_time;
-            commitTime.innerText = item.Commit_time == null ? "":item.Commit_time;
+            commitTime.innerText = item.Commit_time == null ? "": showDayTime( new Date( item.Commit_time ) );
+            commitTime.setAttribute( "time",item.Commit_time == null ? "": item.Commit_time );
             actionResult.innerText = item.Remarks == null ? "":item.Remarks;
             warning.innerText = item.Warning == null?"":item.Warning;
 
