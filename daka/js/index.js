@@ -97,7 +97,7 @@ var query_action = function ( timestamp_seconds ) {
             actionTime.innerText = item.Action_time;
             actionName.innerText = item.Action;
             takeTime.innerText = item.Take_time == null ? "" :item.Take_time;
-            commitTime.innerText = item.Commit_time == null ? "": showDayTime( new Date( item.Commit_time ) );
+            commitTime.innerText = item.Commit_time == null ? "": showDayTime( new Date( item.Commit_time.replace(/-/g, "/") ) );
             commitTime.setAttribute( "time",item.Commit_time == null ? "": item.Commit_time );
             actionResult.innerText = item.Remarks == null ? "":item.Remarks;
             warning.innerText = item.Warning == null?"":item.Warning;
