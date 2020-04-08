@@ -18,12 +18,46 @@
     margin-bottom: 10px;
 }
 
+#list, #week_play{
+    float: left;
+    border: 1px solid red;
+    /*width: 45%;*/
+}
+
+#week_play{
+    display: none;
+}
+
 #list .task_item span {
     margin: 5px;
 }
 
 #list .task_item .warning {
     color: red;
+}
+
+.line_left, .line_right{
+    width: 50px;
+    float: left;
+    border: 2px solid #35bbfd;
+
+    margin-top: 13px;
+}
+
+/*.line_right{*/
+    /*width: 10px;*/
+    /*float: left;*/
+    /*border: 2px solid red;*/
+/*}*/
+
+.clean{
+    clear: both;
+}
+
+.task_item_info{
+    float: left;
+    margin:5px;
+    margin-left: 15px;
 }
 
 #list .task_item span:nth-of-type(1) {

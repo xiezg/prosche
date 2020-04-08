@@ -9,18 +9,55 @@
 </head>
 <body>
 
-<!--<a href="#" class="link">51js<div class="tips">i am tips.</div></a>-->
-
 <div>
     <p id="now_date"></p>
-    <p>赶紧把mp4推流的事情调研完毕，目的有两个：</p>
-    <p><1>、了解推流</p>
-    <p><2>、可以在空闲时间看视频学习</p>
+
+    <p>计划是需要执行的，不是用来看的</p>
+
+    <p>计划做不下去的一个重要原因是，没有把某些事情细分，与实际情况不符合</p>
+
+    <div>
+        <p>早上吃饭的时间没有安排</p>
+
+        <p>某些事情虽然重要，但是偶尔会临时调整</p>
+    </div>
 </div>
 <div>
     <div id="list">
+        <div style="display: none">
+            <div class="task_item"><input type="checkbox" onclick="commit_data()"><span>actionType</span><span>actionTime</span>
+
+                <div>
+                    <div>
+                        <div class="line_left"></div>
+                        <div class="task_item_info">actionName</div>
+                        <div class="line_right"></div>
+                        <div class="clean"></div>
+                    </div>
+                    <div>
+                        <div class="task_item_info">commitTime</div>
+                        <div class="clean"></div>
+                    </div>
+                    <div>
+                        <div class="task_item_info">takeTime</div>
+                        <div class="clean"></div>
+                    </div>
+                    <div>
+                        <div class="task_item_info">actionResult</div>
+                        <div class="clean"></div>
+                    </div>
+                    <div>
+                        <div class="warning task_item_info">warning</div>
+                        <div class="clean"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div id="week_play">
+    </div>
+    <div class="clean"></div>
     <div>
         <div id="days_list">
         </div>
